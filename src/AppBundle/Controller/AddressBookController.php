@@ -11,6 +11,6 @@ class AddressBookController extends Controller
 
     public function editAction(Request $request)
     {
-        return $this->render('@App/AddressBook/edit.html.twig' );
+        return $this->render('@App/AddressBook/edit.html.twig');
     }
 }
