@@ -35,8 +35,7 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    globals:
-        app_name: "%app_name%"
+
 
 # Doctrine Configuration
 doctrine:
@@ -71,3 +70,11 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+vich_uploader:
+    mappings:
+        profile_picture:
+            uri_prefix: '%app.path.profile_picture%'
+            upload_destination: '%kernel.project_dir%%app.path.profile_pictures%'
+            delete_on_update:   true
+            delete_on_remove:   true
