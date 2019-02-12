@@ -1,37 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">{{ 'header.adddress_form'|trans }}</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>{{ 'form.label.first_name'| trans}}</th>
+                        <th>{{ 'form.label.last_name'| trans}}</th>
+                        <th>{{ 'form.label.phone'| trans}}</th>
+                        <th>{{ 'label.address.full_address'| trans}}</th>
+                        <th>{{ 'form.label.action'|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
+                    {% for flashMessage in app.session.flashbag.get('error') %}
 
+                        {{ flashMessage }}
+
+                    {% endfor %}
+                    {% for address in addresses %}
+                    <tr>
+                        <td>{{ address.firstName }}</td>
+                        <td>{{ address.lastName }}</td>
+                        <td>{{ address.phone }}</td>
+                        <td>{{ address.streetNumber }},{{ address.streetName }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-icon-split btn-sm" href="{{ path('app_address_book_view',{'id':address.getId()}) }}">
+                                <span class="icon text-white-50">
+                                <i class="fas fa-info-circle"></i>
+                                </span>
+                                <span class="text"> {{ 'label.address.view_details'|trans }}</span>
+                            </a>
+                            <a class="btn btn-info btn-icon-split btn-sm" href="{{ path('app_address_book_edit',{'id':address.getId()}) }}">
+                                <span class="icon text-white-50">
+                                <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text"> {{ 'label.address.edit'|trans }}</span>
+                            </a>
+
+                            <a class="btn btn-danger btn-icon-split btn-sm" id="deleteButton" href="#" rel="{{ path('app_address_book_delete',{'id':address.getId()}) }}">
+
+                                <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                                </span>
+                                <span class="text"> {{ 'label.address.delete'|trans }}</span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -39,4 +62,4 @@
     </div>
 
 </div>
-<!-- /.container-fluid -->
+{% endblock body %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <img  src="{{ vich_uploader_asset(address, 'imageFile') }}" width="280" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.first_name'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.firstName }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.last_name'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.lastName }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.birthday'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.birthday| date('d, F Y') }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.phone'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.phone }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.email'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.email }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'label.address.full_address'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.streetNumber }}, {{ address.streetName }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.city'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.city }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.country'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.country }}</div>
+                            <hr class="sidebar-divider">
+
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{ 'form.label.zipcode'|trans }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ address.zip }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock body %}

@@ -66,7 +66,7 @@ class AddressBook
     /**
      * @ORM\Column(type="string", length=20, nullable=false, name="zipcode")
      */
-    protected $zipcode;
+    protected $zip;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false, name="city")
@@ -86,7 +86,7 @@ class AddressBook
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="profile_picture", fileNameProperty="pictureFile")
+     * @Vich\UploadableField(mapping="profile_picture", fileNameProperty="profilePicture")
      *
      * @var File
      * @Assert\File(
@@ -97,6 +97,56 @@ class AddressBook
      */
     protected $imageFile;
 
+    /**
+     * @ORM\Column(type="date", nullable=false, name="birthday")
+     */
+    protected $birthday;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
     /**
      * @return mixed
      */
@@ -131,17 +181,17 @@ class AddressBook
     /**
      * @return mixed
      */
-    public function getZipcode()
+    public function getZip()
     {
-        return $this->zipcode;
+        return $this->zip;
     }
 
     /**
-     * @param mixed $zipcode
+     * @param mixed $zip
      */
-    public function setZipcode($zipcode)
+    public function setZip($zip)
     {
-        $this->zipcode = $zipcode;
+        $this->zip = $zip;
     }
 
     /**
@@ -208,6 +258,21 @@ class AddressBook
     {
         $this->email = $email;
     }
+    /**
+     * @return mixed
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @param mixed $birthday
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+    }
 
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
@@ -238,7 +303,7 @@ class AddressBook
      *
      * @return AddressBook
      */
-    public function setProfile($profilePicture)
+    public function setProfilePicture($profilePicture)
     {
         $this->profilePicture = $profilePicture;
 

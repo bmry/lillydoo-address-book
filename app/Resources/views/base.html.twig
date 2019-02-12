@@ -32,6 +32,7 @@
 
         <!-- Page level custom scripts -->
         <script src="{{ app.request.schemeAndHttpHost() }}/js/demo/datatables-demo.js"></script>
+        <script src="{{ app.request.schemeAndHttpHost() }}{{ asset('js/bootbox.min.js') }}"></script>
 
     {% endblock %}
 
@@ -50,30 +51,20 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">LillyDoo</div>
+
+            <div class="sidebar-brand-text mx-3">LILLYDOO</div>
         </a>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-        <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{{ path('app_address_book_list') }}">
                 <i class="fas fa-fw fa-list"></i>
-                <span>{{ 'label.address'| trans }}</span>
+                <span>{{ 'label.address.list'| trans }}</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ path('app_address_book_create_new') }}">
+                <i class="fas fa-fw fa-plus"></i>
+                <span>{{ 'label.address.create'| trans }}</span>
             </a>
         </li>
 
@@ -87,6 +78,30 @@
 
         <!-- Main Content -->
         <div id="content">
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-info alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    {{ flashMessage|trans|raw }}
+                </div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <i class="fa fa-check"></i> {{ flashMessage|trans|raw }}
+                </div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <i class="fa fa-exclamation-circle"></i> {{ flashMessage|trans|raw }}
+                </div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('script') %}
+                {{ flashMessage|trans|raw }}
+            {% endfor %}
             {% block body %}
 
             {% endblock %}
@@ -114,6 +129,20 @@
 </a>
 
 <!-- Bootstrap core JavaScript-->
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
 
+        $('#deleteButton').click(function() {
+            var url = $(this).attr('rel');
+            bootbox.confirm("{{ 'address.delete.confirmation'|trans }}", function(result){
+                if(result == true){
+                    window.location.href = url ;
+                }
+            });
+        });
+    });
+
+</script>
 </body>
 </html>

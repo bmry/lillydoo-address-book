@@ -1,0 +1,20 @@
+app_address_book_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AppBundle:AddressBook:edit }
+    methods: [GET|POST]
+app_address_book_create_new:
+    path:   /create
+    defaults: { _controller: AppBundle:AddressBook:edit }
+    methods: [GET|POST]
+app_address_book_list:
+    path:   /
+    defaults: { _controller: AppBundle:AddressBook:list }
+    methods: [GET]
+app_address_book_view:
+    path:   /{id}
+    defaults: { _controller: AppBundle:AddressBook:view }
+    methods: [GET]
+app_address_book_delete:
+    path:   /delete/{id}
+    defaults: { _controller: AppBundle:AddressBook:delete }
+    methods: [GET]
