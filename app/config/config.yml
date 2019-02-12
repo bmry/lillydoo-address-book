@@ -36,11 +36,18 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
+#Vich Uploader
+vich_uploader:
+    db_driver: orm
+    mappings:
+        profile_picture:
+            uri_prefix:         '%app.path.profile_pictures%'
+            upload_destination: '%kernel.project_dir%%app.path.profile_pictures%'
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
+        driver: pdo_sqlite
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
@@ -52,7 +59,7 @@ doctrine:
         #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
-        #path: '%database_path%'
+        path: '%database_path%'
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
@@ -71,10 +78,11 @@ sensio_framework_extra:
    router:
         annotations: false
 
-vich_uploader:
-    mappings:
-        profile_picture:
-            uri_prefix: '%app.path.profile_picture%'
-            upload_destination: '%kernel.project_dir%%app.path.profile_pictures%'
-            delete_on_update:   true
-            delete_on_remove:   true
+doctrine_migrations:
+  dir_name: "%kernel.root_dir%/../src/AppBundle/DoctrineMigrations"
+  namespace: AppBundle\DoctrineMigrations
+  table_name: migration_versions
+  name: Application Migrations
+  organize_migrations: "BY_YEAR_AND_MONTH" # Version >= 1.2, possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+  custom_template: ~ # Version >= 1.2, path to your custom migrations template
+

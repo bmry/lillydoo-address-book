@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AddressBook
@@ -90,7 +91,7 @@ class AddressBook
      * @var File
      * @Assert\File(
      *     maxSize = "1024k",
-     *     mimeTypes = {"image/gif", "image/jpeg", "image/jpg", "image/png", "image/svg+xml"},
+     *     mimeTypes = {"image/gif", "image/jpeg", "image/jpg", "image/png"},
      *     mimeTypesMessage = "Please upload a valid image"
      * )
      */
@@ -191,21 +192,6 @@ class AddressBook
         $this->phone = $phone;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFax()
-    {
-        return $this->fax;
-    }
-
-    /**
-     * @param mixed $fax
-     */
-    public function setFax($fax)
-    {
-        $this->fax = $fax;
-    }
 
     /**
      * @return mixed
