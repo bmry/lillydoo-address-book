@@ -99,6 +99,10 @@ Fehler beim Erstellen des Datensatzes</target>
                     <source>address.empty.record</source>
                     <target>Sie haben noch keine Einträge in Ihrem Adressbuch. </target>
                 </trans-unit>
+                 <trans-unit id="24">
+                    <source>address.delete.success.message</source>
+                    <target>Datensatz gelöscht </target>
+                </trans-unit>
 
                 </body>
                </file>
