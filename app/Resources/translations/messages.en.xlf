@@ -94,6 +94,10 @@
                     <source>address.error.message</source>
                     <target>Error creating record</target>
                 </trans-unit>
+                 <trans-unit id="24">
+                    <source>address.empty.record</source>
+                    <target>You have no record in your address book yet. </target>
+                </trans-unit>
 
                 </body>
                </file>
