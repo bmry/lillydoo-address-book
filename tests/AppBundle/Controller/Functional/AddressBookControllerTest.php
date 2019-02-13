@@ -127,7 +127,7 @@ class AddressBookControllerTest extends WebTestCase
     public function testDelete(){
         $address = $this->entityManager->getRepository('AppBundle:AddressBook')->findOneBy(['email' => 'test@bamgbose.com']);
         $crawler = $this->client->request(
-            'DELETE',
+            'GET',
             $this->generateUrl('app_address_book_delete', ['id' => $address->getId(), '_locale' => 'en'])
         );
 
