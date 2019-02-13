@@ -29,9 +29,8 @@ class AddressBookController extends Controller
             return $this->redirect($this->generateUrl('app_address_book_list'));
         }
 
-        return $this->render('@App/AddressBook/edit.html.twig', array('form' => $form->createView(), 'object' =>$addressBook,));
+        return $this->loadEditPage($form, $addressBook);
     }
-
 
     public function listAction()
     {
@@ -57,7 +56,33 @@ class AddressBookController extends Controller
         $address = $addressRepo->findOneBy(array('id' => $id));
         $em->remove($address);
         $em->flush();
-
         return $this->redirect($this->generateUrl('app_address_book_list'));
+    }
+
+    protected function isDuplicateEntry(AddressBook $addressBook) {
+        $duplicateEntry = false;
+        $translator = $this->get('translator');
+        $entityManager = $this->getDoctrine()->getManager();
+        $addressRepo = $entityManager->getRepository('AppBundle:AddressBook');
+        $addressBookEmail = $addressRepo->findOneBy(['email' => $addressBook->getEmail()]);
+        $addressBookPhoneNumber = $addressRepo->findOneBy(['phone' => $addressBook->getPhone()]);
+
+        if($addressBookEmail){
+            $duplicateEntry = true;
+            $duplicateEmailMessage = $translator->trans('address.error.duplicate_email');
+            $this->addFlash('error',$duplicateEmailMessage);
+        }
+
+        if($addressBookPhoneNumber){
+            $duplicateEntry = true;
+            $duplicatePhoneMessage = $translator->trans('address.error.duplicate_phone_number');
+            $this->addFlash('error',$duplicatePhoneMessage);
+        }
+
+    }
+
+    protected function loadEditPage($form, AddressBook $addressBook){
+
+        return $this->render('@App/AddressBook/edit.html.twig', array('form' => $form->createView(), 'object' =>$addressBook,));
     }
 }

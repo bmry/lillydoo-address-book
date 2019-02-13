@@ -132,17 +132,17 @@
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable();
+    });
 
-        $('#deleteButton').click(function() {
-            var url = $(this).attr('rel');
+    function deleteRecord(buttonId){
+        var deleteBtn = $('#deleteButton-'+buttonId);
+            var url = deleteBtn.attr('rel');
             bootbox.confirm("{{ 'address.delete.confirmation'|trans }}", function(result){
                 if(result == true){
                     window.location.href = url ;
                 }
             });
-        });
-    });
-
+    }
 </script>
 </body>
 </html>

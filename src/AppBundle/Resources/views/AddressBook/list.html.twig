@@ -45,7 +45,7 @@
                                 <span class="text"> {{ 'label.address.edit'|trans }}</span>
                             </a>
 
-                            <a class="btn btn-danger btn-icon-split btn-sm" id="deleteButton" href="#" rel="{{ path('app_address_book_delete',{'id':address.getId()}) }}">
+                            <a class="btn btn-danger btn-icon-split btn-sm" id="deleteButton-{{ address.getId() }}" onclick="deleteRecord({{ address.getId() }})" href="#" rel="{{ path('app_address_book_delete',{'id':address.getId()}) }}">
 
                                 <span class="icon text-white-50">
                                 <i class="fas fa-trash"></i>

@@ -1,3 +1,7 @@
+app_index:
+  path: /
+  defaults: { _controller: AppBundle:AddressBook:list }
+
 app_address_book:
   resource: "@AppBundle/Resources/config/address_book/routing.yml"
   prefix:   /address_book

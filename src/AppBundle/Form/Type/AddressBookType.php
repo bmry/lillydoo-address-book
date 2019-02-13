@@ -8,6 +8,7 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Validaton\Constraints\AddressBook;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -98,13 +99,15 @@ class AddressBookType extends AbstractType
 
         ;
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\AddressBook',
+            'cascade_validation' => true,
+            'constraints' => [new  AddressBook()],
         ));
     }
-
     public function getName()
     {
         return 'appbundle_address';
