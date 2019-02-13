@@ -8,6 +8,7 @@ Steps
 2. Then in the browser Run http://127.0.0.1:8000
    NOTE: Default Language is German
    English Translation : http://127.0.0.1:8000/en
+   
    German Translation : http://127.0.0.1:8000/de
    
 PHPUNIT TESTING
