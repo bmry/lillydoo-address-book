@@ -59,7 +59,7 @@ class AddressBookController extends Controller
         $em->flush();
 
         $translator = $this->get('translator');
-        $message = $translator->trans('address.success.delete.message');
+        $message = $translator->trans('address.delete.success.message');
         $this->addFlash('success', $message);
         return $this->redirect($this->generateUrl('app_address_book_list'));
     }

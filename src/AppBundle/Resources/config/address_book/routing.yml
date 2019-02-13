@@ -17,4 +17,4 @@ app_address_book_view:
 app_address_book_delete:
     path:   /delete/{id}
     defaults: { _controller: AppBundle:AddressBook:delete }
-    methods: [GET]
+    methods: [DELETE]

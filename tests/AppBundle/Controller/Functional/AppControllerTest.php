@@ -17,6 +17,7 @@ class AppControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->container = self::$kernel->getContainer();
         $this->entityManager = $this->container->get('doctrine')->getManager();
+
     }
 
     protected function trans($string, $params = [], $domain = null)
@@ -127,10 +128,13 @@ class AppControllerTest extends WebTestCase
         $address = $this->entityManager->getRepository('AppBundle:AddressBook')->findOneBy(['email' => 'test@bamgbose.com']);
         $crawler = $this->client->request(
             'DELETE',
-            $this->generateUrl('app_address_book_view', ['id' => $address->getId()])
+            $this->generateUrl('app_address_book_delete', ['id' => $address->getId()])
         );
 
+
+
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->client->followRedirect();
 
         $response = $this->client->getResponse()->getContent();
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
