@@ -5,7 +5,7 @@ namespace Tests\AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class AppControllerTest extends WebTestCase
+class AddressBookControllerTest extends WebTestCase
 {
 
     protected  $container;
@@ -46,7 +46,7 @@ class AppControllerTest extends WebTestCase
     public function testCreateAddressBook(){
         $crawler = $this->client->request(
             'GET',
-            $this->generateUrl('app_address_book_create_new')
+            $this->generateUrl('app_address_book_create_new',['_locale' => 'en'])
         );
         $response = $this->client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -80,7 +80,7 @@ class AppControllerTest extends WebTestCase
     public function testDuplicate(){
         $crawler = $this->client->request(
             'GET',
-            $this->generateUrl('app_address_book_create_new')
+            $this->generateUrl('app_address_book_create_new',['_locale' => 'en'])
         );
         $response = $this->client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -107,7 +107,7 @@ class AppControllerTest extends WebTestCase
         $form["{$formName}[city]"] = 'Lagos';
         $crawler = $this->client->submit($form);
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertContains("{$this->trans('address.error.duplicate_phone_number')}", $this->client->getResponse()->getContent());
+        $this->assertContains("Duplicate Entry Alert: Phone number already exist.", $this->client->getResponse()->getContent());
 
     }
 
@@ -115,7 +115,7 @@ class AppControllerTest extends WebTestCase
         $address = $this->entityManager->getRepository('AppBundle:AddressBook')->findOneBy(['email' => 'test@bamgbose.com']);
         $crawler = $this->client->request(
             'GET',
-            $this->generateUrl('app_address_book_view', ['id' => $address->getId()])
+            $this->generateUrl('app_address_book_view', ['id' => $address->getId(),'_locale' => 'en'])
         );
 
         $response = $this->client->getResponse()->getContent();
@@ -128,7 +128,7 @@ class AppControllerTest extends WebTestCase
         $address = $this->entityManager->getRepository('AppBundle:AddressBook')->findOneBy(['email' => 'test@bamgbose.com']);
         $crawler = $this->client->request(
             'DELETE',
-            $this->generateUrl('app_address_book_delete', ['id' => $address->getId()])
+            $this->generateUrl('app_address_book_delete', ['id' => $address->getId(), '_locale' => 'en'])
         );
 
 

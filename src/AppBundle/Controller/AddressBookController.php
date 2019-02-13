@@ -6,6 +6,7 @@ use AppBundle\Entity\AddressBook;
 use AppBundle\Form\Type\AddressBookType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AddressBookController extends Controller
 {
@@ -45,6 +46,10 @@ class AddressBookController extends Controller
     {
         $addressRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:AddressBook');
         $address = $addressRepo->findOneBy(array('id' => $id));
+        $response =$this->verifyRecordExist($address);
+        if($response instanceof Response){
+            return $response;
+        }
 
         return $this->render('@App/AddressBook/view.html.twig',array('address' => $address));
     }
@@ -55,6 +60,11 @@ class AddressBookController extends Controller
         $addressRepo = $em->getRepository('AppBundle:AddressBook');
         $address = $addressRepo->findOneBy(array('id' => $id));
 
+        $response =$this->verifyRecordExist($address);
+        if($response instanceof Response){
+            exit;
+            return $response;
+        }
         $em->remove($address);
         $em->flush();
 
@@ -68,5 +78,17 @@ class AddressBookController extends Controller
     protected function loadEditPage($form, AddressBook $addressBook){
 
         return $this->render('@App/AddressBook/edit.html.twig', array('form' => $form->createView(), 'object' =>$addressBook,));
+    }
+
+    private function verifyRecordExist(AddressBook $addressBook = null)
+    {
+        $response = null;
+        $translator = $this->get('translator');
+        $message = $translator->trans('address.error.record_not_found');
+        if(!$addressBook){
+            $this->addFlash('error',$message );
+            $response = $this->redirect($this->generateUrl('app_address_book_list'));
+        }
+        return $response;
     }
 }

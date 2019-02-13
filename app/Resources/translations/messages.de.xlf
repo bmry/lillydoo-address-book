@@ -103,6 +103,10 @@ Fehler beim Erstellen des Datensatzes</target>
                     <source>address.delete.success.message</source>
                     <target>Datensatz gelöscht </target>
                 </trans-unit>
+                <trans-unit id="26">
+                        <source>address.error.record_not_found</source>
+                        <target>Aufnahme nicht gefunden</target>
+                </trans-unit>
 
                 </body>
                </file>

@@ -2,4 +2,5 @@ app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /{_locale}
     requirements:
-        _locale: en|de
+        _S: "/?"
+        _locale: '|de|en'
