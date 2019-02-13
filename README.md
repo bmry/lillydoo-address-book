@@ -10,3 +10,5 @@ Steps
    English Translation : http://127.0.0.1:8000/en
    German Translation : http://127.0.0.1:8000/de
    
+PHPUNIT TESTING
+1.  ./vendor/phpunit/phpunit/phpunit
